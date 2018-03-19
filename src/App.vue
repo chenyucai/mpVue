@@ -7,6 +7,8 @@ export default {
     wx.setStorageSync('logs', logs)
 
     console.log('app created and cache logs by setStorageSync')
+
+    this.$store.dispatch('getUserInfo');
   }
 }
 </script>

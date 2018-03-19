@@ -1,0 +1,211 @@
+@import "./variables";
+
+.media-scaleY() {
+  @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5) {
+    &::after {
+      -webkit-transform: scaleY(0.7);
+      transform: scaleY(0.7);
+    }
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
+    &::after {
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+.media-scaleX() {
+  @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5) {
+    &::after {
+      -webkit-transform: scaleX(0.7);
+      transform: scaleX(0.7);
+    }
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) {
+    &::after {
+      -webkit-transform: scaleX(0.5);
+      transform: scaleX(0.5);
+    }
+  }
+}
+
+.hairline-top(@color:@border-color-base, @width: @border-width-sm) {
+  position: relative;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: @width solid @color;
+  }
+  .media-scaleY();
+}
+
+.hairline-bottom(@color:@border-color-base, @left:0, @width: @border-width-sm) {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    left: @left;
+    bottom: 0;
+    width: 100%;
+    border-bottom: @width solid @color;
+  }
+  .media-scaleY();
+}
+
+.hairline-left(@color:@border-color-base, @width: @border-width-sm) {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    border-left: @width solid @color;
+  }
+  .media-scaleX();
+}
+
+.hairline-right(@color:@border-color-base, @width: @border-width-sm) {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-right: @width solid @color;
+  }
+  .media-scaleX();
+}
+
+.hairline-right-half(@top: 0, @bottom:0, @color:@border-color-base, @width: @border-width-sm) {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    content: '';
+    right: 0;
+    top: @top;
+    bottom: @bottom;
+    border-right: @width solid @color;
+  }
+  .media-scaleX();
+}
+
+.touchHighlight(@color:@brand-primary-tap-highlight) {
+  &:active {
+    background-color: @color;
+  }
+}
+
+.touchOpacity(@int:@brand-primary-tap-opacity) {
+  &:active {
+    opacity: @int;
+  }
+}
+
+.bg-image(@url, @width:auto, @height:auto) {
+  width: @width;
+  height: @height;
+  background-size: @width @height;
+  background-repeat: no-repeat;
+  background-image: ~"url(@{url}@2x.png)";
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    background-image: ~"url(@{url}@3x.png)";
+  }
+}
+
+.ellipsis(@w:auto) {
+  width: @w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.ellipsisLn(@line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+
+.text_wrap() {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.hyphens() {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+// 扩展点击区域
+.extend-click() {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+.clearfix() {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+.base-arrow-right() {
+  .bg-image('~images/icon-arrow-right', 8px, 14px);
+}
+
+.base-arrow-down() {
+  .bg-image('~images/icon-arrow-down', 14px, 8px);
+}
+
+.base-arrow-right-white() {
+  .bg-image('~images/icon-arrow-right-white', 8px, 14px);
+}
+
+.base-mask() {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10200;
+  background-color: rgba(0, 0, 0, 0.3);
+}

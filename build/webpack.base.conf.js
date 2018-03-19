@@ -24,9 +24,14 @@ const pagesEntry = getEntry(resolve('./src/pages'), 'main.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 module.exports = {
-  entry: entry, // 如果要自定义生成的 dist 目录里面的文件路径，
-                // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
-                // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
+  entry: {
+    app: resolve('./src/main.js'),
+    'pages/consult/hospital/list': resolve('./src/pages/consult/hospital-list/main.js'),
+    'pages/consult/doctor/list': resolve('./src/pages/consult/doctor-list/main.js'),
+    'pages/consult/doctor/detail': resolve('./src/pages/consult/doctor-detail/main.js'),
+    'pages/logs/logs': resolve('./src/pages/logs/main.js'),
+    'pages/user/center': resolve('./src/pages/user-center/user-center/main.js')
+  },
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -39,7 +44,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
-      '@': resolve('src')
+      '@': resolve('src'),
+      'images': resolve('src/images')
     },
     symlinks: false
   },
