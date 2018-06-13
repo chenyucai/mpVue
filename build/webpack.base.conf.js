@@ -3,35 +3,29 @@ var fs = require('fs')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var MpvuePlugin = require('webpack-mpvue-asset-plugin')
+var glob = require('glob')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (dir, entryFile) {
-  const files = fs.readdirSync(dir)
-  return files.reduce((res, k) => {
-    const page = path.resolve(dir, k, entryFile)
-    if (fs.existsSync(page)) {
-      res[k] = page
-    }
+function getEntry (rootSrc, pattern) {
+  var files = glob.sync(path.resolve(rootSrc, pattern))
+  return files.reduce((res, file) => {
+    var info = path.parse(file)
+    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
+    res[key] = path.resolve(file)
     return res
   }, {})
 }
 
 const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src/pages'), 'main.js')
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 module.exports = {
-  entry: {
-    app: resolve('./src/main.js'),
-    'pages/consult/hospital/list': resolve('./src/pages/consult/hospital-list/main.js'),
-    'pages/consult/doctor/list': resolve('./src/pages/consult/doctor-list/main.js'),
-    'pages/consult/doctor/detail': resolve('./src/pages/consult/doctor-detail/main.js'),
-    'pages/logs/logs': resolve('./src/pages/logs/main.js'),
-    'pages/user/center': resolve('./src/pages/user-center/user-center/main.js')
-  },
+  entry,
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -45,7 +39,8 @@ module.exports = {
     alias: {
       'vue': 'mpvue',
       '@': resolve('src'),
-      'images': resolve('src/images')
+      // 'flyio': 'flyio/dist/npm/wx',
+      'wx': resolve('src/utils/wx')
     },
     symlinks: false
   },
@@ -103,5 +98,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new MpvuePlugin()
+  ]
 }

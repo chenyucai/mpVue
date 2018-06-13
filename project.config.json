@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "wxe4534bfbe9b47d4a",
+	"appid": "wx7c097fc571965d3d",
 	"projectname": "mpvue-demo",
 	"condition": {
 		"search": {

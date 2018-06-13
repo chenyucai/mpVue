@@ -1,5 +1,5 @@
 const originJsonp = {};
-import {coverData, makeRequestHeader} from './signature';
+import {coverData, makeRequestHeader} from './sign';
 import {baseUrl} from '../config/env';
 import Md5 from "../framework/utils/Md5";
 
