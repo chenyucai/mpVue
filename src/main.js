@@ -21,37 +21,31 @@ export default {
   // 这个字段走 app.json
   config: {
     pages: [
-      '^pages/consult/server/list/main'
+      '^pages/consult/server/index/main',
+      'pages/consult/server/list/main',
+      'pages/consult/server/detail/main',
+      'pages/consult/server/message/main',
+      'pages/user/main'
     ], // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
     window: {
-      navigationBarBackgroundColor: '#9a7acf',
-      navigationBarTitleText: '在线问诊',
+      navigationBarBackgroundColor: '#FF8DA1',
+      navigationBarTitleText: '首页',
       navigationBarTextStyle: 'white',
       backgroundColor: '#f2f2f2'
     },
     tabBar: {
       color: '#333333',
-      selectedColor: '#9a7acf',
+      selectedColor: '#FF8DA1',
       backgroudColor: '#FFFFFF',
       borderStyle: 'black',
       list: [
         {
-          text: '找医生',
-          pagePath: 'pages/consult/server/list/main',
-          iconPath: 'static/images/nav-doctor.png',
-          selectedIconPath: 'static/images/nav-doctor-select.png'
+          text: '服务',
+          pagePath: 'pages/consult/server/index/main'
         },
         {
-          text: '消息',
-          pagePath: 'pages/consult/server/list/main',
-          iconPath: 'static/images/nav-message.png',
-          selectedIconPath: 'static/images/nav-message-select.png'
-        },
-        {
-          text: '我的',
-          pagePath: 'pages/consult/server/list/main',
-          iconPath: 'static/images/nav-my.png',
-          selectedIconPath: 'static/images/nav-my-select.png'
+          text: '我',
+          pagePath: 'pages/user/main'
         }
       ]
     }

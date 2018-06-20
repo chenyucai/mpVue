@@ -7,7 +7,7 @@ const request = new Fly();
 request.config.timeout = 10 * 1000;
 
 if (process.env.NODE_ENV === 'development') {
-  request.config.baseURL = '';
+  request.config.baseURL = 'http://85759624.tools.ruochuchina.com/patient/api/';
 } else if (process.env.NODE_ENV === 'production') {
   request.config.baseURL = '';
 }
@@ -25,7 +25,7 @@ request.interceptors.request.use(request => {
 request.interceptors.response.use(
   response => {
     wx.hideLoading();
-    return Promise.resolve(response.data);
+    return Promise.resolve(response.data.data);
   },
   err => {
     wx.hideLoading();

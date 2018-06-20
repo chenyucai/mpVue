@@ -1,6 +1,9 @@
 import {Md5} from 'graf-foundation';
 import wx from './wx';
 
+const testPubKey = '';
+const testSign = '';
+
 const configHeader = {
   /** 请求数据格式，如： application/json */
   ContentType: 'application/json',
@@ -31,12 +34,12 @@ const configHeader = {
 
   /** 验证公钥 */
   PubKey: () => {
-    return wx.getStorageSync('pubKey') || 'H5';
+    return testPubKey || wx.getStorageSync('pubKey') || 'H5';
   },
 
   /** 验证 */
   Signature: () => {
-    return wx.getStorageSync('signature') || 'H5';
+    return testSign || wx.getStorageSync('signature') || 'H5';
   },
 
   /** 针对以上 Header 参数的 MD5 验签 */
@@ -46,7 +49,7 @@ const configHeader = {
 
   /** 获取域名(机构编号) */
   CompanyNo: () => {
-    return '';
+    return '85759624';
   }
 };
 

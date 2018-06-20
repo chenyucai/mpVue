@@ -1,5 +1,3 @@
-import Md5 from "../framework/utils/Md5";
-
 export const getImageUrl = (url, imageAction = '') => {
   if (url && url.substr(0, 4) === 'http') {
     return url;
@@ -35,16 +33,6 @@ export const goodsKindToText = (code) => {
   }
 };
 
-/**
- * 聊天键, A->B、B->A对话永远以患者为中心只保存 md5(companyID + patientId + doctorId)
- * @param companyId
- * @param patientId
- * @param doctorId
- */
-export const makeIMChatId = (companyId, patientId, doctorId) => {
-  return Md5.hex_md5(companyId + patientId + doctorId);
-};
-
 export const genderToText = (code) => {
   switch (code) {
     case '01':
@@ -61,4 +49,16 @@ export const ImMessageTypes = {
   IMG: 'IMG',
   Audio: 'Audio',
   Video: 'Video'
+};
+
+export const doctorLevelToText = (code) => {
+  return {
+    '01': '主任医师',
+    '02': '副主任医师',
+    '03': '医师',
+    '04': '护士长',
+    '05': '护士',
+    '06': '主治医师',
+    '07': '住院医师'
+  }[code];
 };
